@@ -138,7 +138,7 @@ public class PlaylistServiceImpl implements PlaylistService {
         channelDAO.deletePlist(plistname);
         try {
             InputStream myfile = new FileInputStream(fname);
-            Scanner myInputFile = new Scanner(myfile, "UTF8");
+            Scanner myInputFile = new Scanner(myfile, "UTF8").useDelimiter("[\n]");
             while (myInputFile.hasNext()) {
                 lineStr = myInputFile.next();
                 if (lineStr.startsWith("acestream:") || lineStr.startsWith("http:") || lineStr.startsWith("https:")
