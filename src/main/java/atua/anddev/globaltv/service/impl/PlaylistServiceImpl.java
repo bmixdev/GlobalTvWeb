@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.apache.log4j.Logger;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -22,8 +21,6 @@ import java.util.Scanner;
 @NoArgsConstructor
 @Service
 public class PlaylistServiceImpl implements PlaylistService {
-
-    private final Logger logger = Logger.getLogger(PlaylistServiceImpl.class);
 
     static Boolean playlistWithGroup;
 
@@ -195,7 +192,7 @@ public class PlaylistServiceImpl implements PlaylistService {
             }
             myInputFile.close();
         } catch (Exception e) {
-            logger.error("Opening Playlist failed :"+e);
+            //logger.warning("Opening Playlist failed :"+e);
         }
     }
 }
