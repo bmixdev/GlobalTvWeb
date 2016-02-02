@@ -46,7 +46,6 @@ public class HomeController {
         modelAndView.addObject("channelList", listChannel);
         modelAndView.addObject("grpSize", grpSize);
         modelAndView.addObject("chSize", chSize);
-        modelAndView.addObject("chUrl", chUrl);
         return modelAndView;
     }
 
@@ -87,10 +86,27 @@ public class HomeController {
         selectedChn = chId;
         chUrl = channelService.getChannelUrlById(chId);
         System.out.println(selectedChn);
-        return home();
+        if (chUrl.startsWith("acestream://"))
+            return viewPlayerAce();
+        else
+            return viewPlayerVlc();
     }
 
-    @RequestMapping(value = "/show_user")
+    @RequestMapping(value = "/view_player1")
+    public ModelAndView viewPlayerAce() {
+        ModelAndView modelAndView = new ModelAndView("player_ace");
+        modelAndView.addObject("chUrl", chUrl);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/view_player2")
+    public ModelAndView viewPlayerVlc() {
+        ModelAndView modelAndView = new ModelAndView("player_vlc");
+        modelAndView.addObject("chUrl", chUrl);
+        return modelAndView;
+    }
+
+/*    @RequestMapping(value = "/show_user")
     public ModelAndView homeu() {
         ModelAndView modelAndView = new ModelAndView("home2");
         List<User> listUsers = userService.getAllUsers();
@@ -102,7 +118,7 @@ public class HomeController {
     public ModelAndView addNewUser(@RequestParam("email") String email, @RequestParam("password") String password, @RequestParam("full_name") String fullName) {
         userService.addUser(new User(email, password, fullName));
         return homeu();
-    }
+    }*/
 
 
 }

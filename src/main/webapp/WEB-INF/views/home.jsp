@@ -31,12 +31,6 @@
         var messg = $('#provList').val();
         document.getElementById('provName').innerHTML = messg;
     }
-    function channelOpen()
-    {
-        chUrl = document.getElementById('chaUrl').firstChild.nodeValue;
-        console.log(chUrl);
-        //$("#myAceModal").modal();
-    }
 </script>
 <div class="row">
     <div class="col-sm-3" align="center" style="border-style: groove; padding:20px; width:300px">
@@ -103,12 +97,7 @@
                             </c:forEach>
                         </select>
                         <br><br>
-                        <label id="chaUrl" name="chnUrl" value="${chUrl}">${chUrl}</label>
-                        <br>
-                        <input type="submit" name="action" value="GetData" class="btn btn-success"
-                               onClick="channelOpen();"
-                        <%--data-toggle="modal" data-target="#myAceModal"--%>>
-                       <%-- <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myAceModal">Open</button>--%>
+                        <input type="submit" name="action" value="Open" class="btn btn-success"
                     </table>
                 </form>
             </div>
