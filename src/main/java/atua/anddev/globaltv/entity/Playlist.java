@@ -61,4 +61,8 @@ public class Playlist {
         return this.updateDate;
     }
 
+    public void setUpdateDate(Date date) {
+        this.updateDate = date;
+    }
+
 }
