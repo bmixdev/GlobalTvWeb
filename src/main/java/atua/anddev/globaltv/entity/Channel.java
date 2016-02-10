@@ -39,11 +39,24 @@ public class Channel {
         this.url = url;
         this.plistname = plistname;
     }
-/*
-    @ManyToOne
-    private User assignee;
 
-    @Column(name = "isDone")
-    private boolean isDone;*/
+    public String getName()
+    {
+        return this.name;
+    }
 
+    public String getUrl()
+    {
+        return this.url;
+    }
+
+    public String getCategory()
+    {
+        return this.category;
+    }
+
+    public String getPlistname()
+    {
+        return this.plistname;
+    }
 }
