@@ -33,21 +33,17 @@ public class Playlist {
 
     @Column(name = "updateDate")
     private Date updateDate;
-    /*
-    @ManyToOne
-    private User author;
-
-    @ManyToOne
-    private User assignee;
-
-    @Column(name = "isDone")
-    private boolean isDone;*/
 
     public Playlist(String name, String url, Integer type, Boolean enable) {
         this.name = name;
         this.url = url;
         this.type = type;
         this.enable = enable;
+    }
+
+    public String getName()
+    {
+        return this.name;
     }
 
 }
