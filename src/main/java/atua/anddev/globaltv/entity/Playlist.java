@@ -41,9 +41,24 @@ public class Playlist {
         this.enable = enable;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return this.name;
+    }
+
+    public String getUrl() {
+        return this.url;
+    }
+
+    public Boolean isEnable() {
+        return this.enable;
+    }
+
+    public Integer getType() {
+        return this.type;
+    }
+
+    public Date getUpdateDate() {
+        return this.updateDate;
     }
 
 }
