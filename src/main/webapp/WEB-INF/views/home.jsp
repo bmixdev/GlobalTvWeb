@@ -40,7 +40,7 @@
             <table border="1">
                 <select id="provList" name="plstnum" onChange="providerChange()">
                     <c:forEach var="plst" items="${playList}" varStatus="status">
-                        <option name="action" value="${status.index+1}"
+                        <option name="action" type="submit" value="${status.index+1}"
                                 <c:choose>
                                     <c:when test="${status.index+1==selectedPlst}">
                                         selected="selected"
