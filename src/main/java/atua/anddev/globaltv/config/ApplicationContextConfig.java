@@ -32,8 +32,8 @@ public class ApplicationContextConfig {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/globaltv?characterEncoding=UTF-8");
-        dataSource.setUsername("root");
-        dataSource.setPassword("root");
+        dataSource.setUsername("adminIHcVcfF");
+        dataSource.setPassword("cS28mX5I755J");
         return dataSource;
     }
 
