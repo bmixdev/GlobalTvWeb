@@ -21,15 +21,24 @@
 <body onLoad="OnStart()">
 <script th:inline="javascript">
 
+    myText = {};
+
     function OnStart() {
+        $.get(
+                "/getPlaylists",
+                function(data) {
+                    alert(data);
+                    //myText=JSON.parse(data);
+                }
+        );
     }
 
     function providerChange() {
         sel = document.getElementById('provList');
         selectedProvider = sel.value;
 
-        var messg = $('#provList').val();
-        document.getElementById('provName').innerHTML = messg;
+        //var messg = myText.records[$('#provList').val()-1].Date;
+        //document.getElementById('provName').innerHTML = messg;
     }
 </script>
 <div class="row">

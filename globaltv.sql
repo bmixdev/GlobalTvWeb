@@ -31,7 +31,7 @@ VALUES
 ('dostupnoe-iptv', 'http://iptv.rumedia.biz/dostupnoe-iptv.m3u', 0, false),
 ('edem.tv', 'https://edem.tv/playlists/uplist/c0501458db7536739c23049fda773bf6/edem_pl.m3u8', 0, true),
 ('RealWeb', 'http://iptv.usafreespace.com/webtv.m3u', 0, true),
-('Максимум TV', 'http://tv.maximuma.net/iptv.m3u', 0, true),
+('РњР°РєСЃРёРјСѓРј TV', 'http://tv.maximuma.net/iptv.m3u', 0, true),
 ('545-TV(UA)', 'http://545-tv.com/listUA.php', 0, true),
 ('545-TV(RU)', 'http://545-tv.com/listRU.php', 0, true),
 ('RuMedia (DOM)', 'http://iptv.rumedia.biz/iptv-playlist/potok_6/DOM.m3u', 0, true),

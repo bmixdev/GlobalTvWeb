@@ -2,19 +2,18 @@ package atua.anddev.globaltv.controller;
 
 import atua.anddev.globaltv.entity.Channel;
 import atua.anddev.globaltv.entity.Playlist;
-import atua.anddev.globaltv.entity.User;
 import atua.anddev.globaltv.service.ChannelService;
 import atua.anddev.globaltv.service.PlaylistService;
 import atua.anddev.globaltv.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+@EnableWebMvc
+@RestController
 public class HomeController {
 
     @Autowired
@@ -30,7 +29,7 @@ public class HomeController {
     int selectedChn = 1;
     int grpSize = 0;
     int chSize = 0;
-    String chUrl="";
+    String chUrl = "";
     String playlistName;
     List<Channel> listGroup = null;
     List<Channel> listChannel = null;
@@ -52,12 +51,9 @@ public class HomeController {
     @RequestMapping(value = "/selected_playlist", method = RequestMethod.GET)
     public ModelAndView playlistInfo(@RequestParam("plstnum") int selected, @RequestParam("action") String action) {
         selectedPlst = selected;
-        if (action.equals("update"))
-        {
+        if (action.equals("update")) {
             playlistService.downloadPlaylist(selected);
-        } else
-        if (action.equals("open"))
-        {
+        } else if (action.equals("open")) {
             playlistService.openPlaylist(selected);
             playlistName = playlistService.getPlaylistNameById(selected);
             listGroup = channelService.getGroupList(playlistName);
@@ -70,8 +66,7 @@ public class HomeController {
 
     @RequestMapping(value = "/selected_catlist", method = RequestMethod.GET)
     public ModelAndView getCatSelection(@RequestParam("ChangeCat") String changeCat) {
-        if (changeCat.equals("All"))
-        {
+        if (changeCat.equals("All")) {
             listChannel = channelService.getAllChannelsByPlaylist(playlistName);
             chSize = channelService.getAllChannelsByPlaylist(playlistName).size();
         } else {
@@ -106,19 +101,24 @@ public class HomeController {
         return modelAndView;
     }
 
-/*    @RequestMapping(value = "/show_user")
-    public ModelAndView homeu() {
-        ModelAndView modelAndView = new ModelAndView("home2");
-        List<User> listUsers = userService.getAllUsers();
-        modelAndView.addObject("userList", listUsers);
-        return modelAndView;
+    @RequestMapping(value = "/getPlaylists", method = RequestMethod.GET)
+    @ResponseBody
+    public String sentListofDates() {
+        List<Playlist> listPlaylists = playlistService.getAllPlaylists();
+        String result = "{\"records\":[";
+        for (int i = 0; i < listPlaylists.size(); i++) {
+            result += "{\"Date\":\"";
+            result += listPlaylists.get(i).getUpdateDate();
+            if (i != listPlaylists.size() - 1)
+                result += "\"},";
+        }
+        result += "\"}]}";
+        return result;
     }
 
-    @RequestMapping(value = "/add_user", method = RequestMethod.POST)
-    public ModelAndView addNewUser(@RequestParam("email") String email, @RequestParam("password") String password, @RequestParam("full_name") String fullName) {
-        userService.addUser(new User(email, password, fullName));
-        return homeu();
-    }*/
-
+    @RequestMapping(value = "/get2Playlists", method = RequestMethod.GET)
+    public List<Playlist> list2Playlists() {
+        return playlistService.getAllPlaylists();
+    }
 
 }
