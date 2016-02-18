@@ -21,24 +21,31 @@
 <body onLoad="OnStart()">
 <script th:inline="javascript">
 
-    myText = {};
+    var playlists;
 
     function OnStart() {
         $.get(
                 "/getPlaylists",
                 function(data) {
-                    alert(data);
+                    //alert(data);
                     //myText=JSON.parse(data);
+                    playlists=data;
                 }
         );
     }
 
+    document.getElementById('provName').innerHTML = "hello";
+
     function providerChange() {
         sel = document.getElementById('provList');
         selectedProvider = sel.value;
-
-        //var messg = myText.records[$('#provList').val()-1].Date;
-        //document.getElementById('provName').innerHTML = messg;
+        var dateint = playlists[$('#provList').val()-1].updateDate;
+        var messg;
+        if (dateint == null)
+            messg = 'Playlist not loaded, Press update button';
+        else
+            messg = new Date(dateint);
+        document.getElementById('provName').innerHTML = messg;
     }
 </script>
 <div class="row">
@@ -59,7 +66,7 @@
                     </c:forEach>
                 </select>
                 <br><br>
-                <label for="provName" id="provName" name="provName"></label>
+                <label for="provName" id="provName" name="provName">${updateDate}</label>
                 <br><br>
                 <input type="submit" name="action" value="update" class="btn btn-warning">
                 <br><br>

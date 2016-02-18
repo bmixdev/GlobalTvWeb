@@ -61,22 +61,20 @@ public class PlaylistServiceImpl implements PlaylistService {
     }
 
     @Transactional
-    public String getPlaylistNameById(int selected)
-    {
+    public String getPlaylistNameById(int selected) {
         Playlist playlist = getPlaylistById(selected);
         String name = playlist.getName();
         return name;
     }
 
     @Transactional
-    public void downloadPlaylist(int selected)
-    {
+    public void downloadPlaylist(int selected) {
         Playlist playlist = getPlaylistById(selected);
         String filename = getFileName(playlist.getName());
         String url = playlist.getUrl();
         int type = playlist.getType();
         String name = playlist.getName();
-        System.out.println(filename+"-"+url);
+        System.out.println(filename + "-" + url);
         try {
             saveUrl(filename, url);
             playlist.setUpdateDate(new Date());
@@ -186,7 +184,7 @@ public class PlaylistServiceImpl implements PlaylistService {
                 if (!groupName.equals("")) {
                     chCategory = groupName;
                 } else if (!groupName2.equals("")) {
-                    groupName2 = groupName2.replace(" ","");
+                    groupName2 = groupName2.replace(" ", "");
                     chCategory = groupName2;
                 }
             }
@@ -194,5 +192,11 @@ public class PlaylistServiceImpl implements PlaylistService {
         } catch (Exception e) {
             //logger.warning("Opening Playlist failed :"+e);
         }
+    }
+
+    @Transactional
+    public Date getUndateDate(int selected) {
+        Playlist playlist = getPlaylistById(selected);
+        return playlist.getUpdateDate();
     }
 }

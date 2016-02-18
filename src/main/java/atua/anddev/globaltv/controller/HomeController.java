@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import java.util.Date;
 import java.util.List;
 
 @EnableWebMvc
@@ -33,11 +34,14 @@ public class HomeController {
     String playlistName;
     List<Channel> listGroup = null;
     List<Channel> listChannel = null;
+    String updateDate;
 
     @RequestMapping(value = "/")
     public ModelAndView home() {
         ModelAndView modelAndView = new ModelAndView("home");
         List<Playlist> listPlaylists = playlistService.getAllPlaylists();
+        updateDate = (playlistService.getUndateDate(selectedPlst) == null) ?
+                "playlist not loaded, press update button" : playlistService.getUndateDate(selectedPlst).toString();
         modelAndView.addObject("playList", listPlaylists);
         modelAndView.addObject("selectedPlst", selectedPlst);
         modelAndView.addObject("selectedChn", selectedChn);
@@ -45,6 +49,7 @@ public class HomeController {
         modelAndView.addObject("channelList", listChannel);
         modelAndView.addObject("grpSize", grpSize);
         modelAndView.addObject("chSize", chSize);
+        modelAndView.addObject("updateDate", updateDate);
         return modelAndView;
     }
 
@@ -60,6 +65,8 @@ public class HomeController {
             listChannel = channelService.getAllChannelsByPlaylist(playlistName);
             grpSize = channelService.getGroupList(playlistName).size();
             chSize = channelService.getAllChannelsByPlaylist(playlistName).size();
+            updateDate = (playlistService.getUndateDate(selectedPlst) == null) ?
+                    "playlist not loaded, press update button" : playlistService.getUndateDate(selectedPlst).toString();
         }
         return home();
     }
@@ -102,21 +109,6 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/getPlaylists", method = RequestMethod.GET)
-    @ResponseBody
-    public String sentListofDates() {
-        List<Playlist> listPlaylists = playlistService.getAllPlaylists();
-        String result = "{\"records\":[";
-        for (int i = 0; i < listPlaylists.size(); i++) {
-            result += "{\"Date\":\"";
-            result += listPlaylists.get(i).getUpdateDate();
-            if (i != listPlaylists.size() - 1)
-                result += "\"},";
-        }
-        result += "\"}]}";
-        return result;
-    }
-
-    @RequestMapping(value = "/get2Playlists", method = RequestMethod.GET)
     public List<Playlist> list2Playlists() {
         return playlistService.getAllPlaylists();
     }
