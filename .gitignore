@@ -1,0 +1,9 @@
+# IDEA files
+.idea
+GlobalTv.iml
+
+# Compiled sources
+target
+
+# bower_components
+/src/main/webapp/resources/assets

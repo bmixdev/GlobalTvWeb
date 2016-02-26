@@ -4,7 +4,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      ng-app="globaltvweb">
 <head>
     <title>Home</title>
     <meta charset="utf-8">
@@ -12,15 +13,19 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="resources/assets/bower_components/angular/angular.min.js" type="text/javascript"></script>
     <style>
         .grpbtn {
             width: 200px
         }
     </style>
 </head>
-<body onLoad="OnStart()">
+<body onLoad="OnStart()" ng-controller="Controller">
 <script th:inline="javascript">
-
+    angular.module('globaltvweb', [])
+            .controller('Controller', function($scope) {
+                $scope.string = "Hello from Angular Controller";
+            });
     var playlists;
 
     function OnStart() {
@@ -51,7 +56,7 @@
 <div class="row">
     <div class="col-sm-3" align="center" style="border-style: groove; padding:20px; width:300px">
         <h1>Playlist</h1>
-
+        <h4>{{ string }}</h4>
         <form method="put" action="/selected_playlist">
             <table border="1">
                 <select id="provList" name="plstnum" onChange="providerChange()">
